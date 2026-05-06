@@ -175,7 +175,7 @@ If you use this code or aggregate results, please cite:
 @article{orrego2026latent,
   title   = {Auditing Molecular and Temporal Geometry in AntigenLM Latent Representations
              of Influenza A HA/NA Sequences},
-  author  = {Orrego-Franco, Carlos Manuel and Ria{\~n}o-Rojas, Juan Carlos},
+  author  = {Orrego-Franco, Carlos Manuel and Riano-Rojas, Juan Carlos},
   journal = {BMC Bioinformatics},
   year    = {2026},
   note    = {Submitted}
@@ -206,8 +206,10 @@ Aggregate result files (JSON and Markdown summaries) may be reused with attribut
 ## Contact
 
 Carlos Manuel Orrego-Franco  
-Universidad Nacional de Colombia  
+Universidad Nacional de Colombia
+corregof@unal.edu.co
 [GitHub: @cmorregof](https://github.com/cmorregof)
 
 Juan Carlos Riaño-Rojas  
-Institutional affiliation to be added before journal submission.
+Universidad Nacional de Colombia
+jcrianoro@unal.edu.co
