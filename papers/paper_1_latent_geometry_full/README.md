@@ -5,12 +5,14 @@ This folder contains an Overleaf-ready draft generated from:
 - `results/latent_geometry_full_metrics.json`
 - `results/latent_geometry_full_summary.md`
 - `results/full_data_audit_summary.md`
+- `results/gisaid_clade_enrichment_results.json`
+- `results/gisaid_clade_enrichment_summary.md`
 - `figures/latent_geometry_full/`
 
 ## What this paper claims
 
 - It audits the geometry of local AntigenLM embeddings for Influenza A.
-- It reports aggregate molecular, temporal, PCA, TwoNN, and local-neighborhood diagnostics.
+- It reports aggregate molecular, temporal, PCA, TwoNN, local-neighborhood, and GISAID clade-label enrichment diagnostics.
 - It uses all cached valid embeddings for global analyses and pair sampling for pairwise correlations.
 
 ## What this paper does not claim
@@ -20,6 +22,7 @@ This folder contains an Overleaf-ready draft generated from:
 - It does not optimize mutations.
 - It does not make clinical or vaccine recommendations.
 - It does not validate a full predictive SDE.
+- It does not validate antigenic similarity or quantitative phylogenetic distances.
 
 ## Overleaf
 
@@ -38,6 +41,7 @@ Upload the contents of this folder to Overleaf and compile `main.tex` with `pdfL
 - `twonn_fit_example.pdf`
 - `temporal_local_neighbors_h1n1_dedup.pdf`
 - `temporal_local_neighbors_h3n2_dedup.pdf`
+- `clade_precision_enrichment.pdf`
 
 ## Figures missing
 

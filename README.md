@@ -6,11 +6,11 @@
 
 This repository contains code and aggregate outputs for:
 
-> **Auditing Molecular and Temporal Geometry in AntigenLM Latent Representations of Influenza A HA/NA Sequences**  
+> **Auditing Molecular, Temporal, and Evolutionary-Taxonomic Geometry in AntigenLM Latent Representations of Influenza A HA/NA Sequences**  
 > Carlos Manuel Orrego-Franco, Juan Carlos Riaño-Rojas  
-> *Prepared for submission to BMC Bioinformatics, 2026*
+> *Prepared for submission to Scientific Reports, 2026*
 
-We present a systematic geometric audit of cached AntigenLM embeddings for 111,756 Influenza A HA/NA records from H1N1 and H3N2. The analysis asks whether latent Euclidean distances preserve molecular sequence similarity, whether temporal structure is present locally or globally, and whether the embedding cloud has low effective dimension.
+We present a systematic geometric audit of cached AntigenLM embeddings for 111,756 Influenza A HA/NA records from H1N1 and H3N2. The analysis asks whether latent Euclidean distances preserve molecular sequence similarity, whether temporal structure is present locally or globally, whether the embedding cloud has low effective dimension, and whether latent neighborhoods are enriched for GISAID clade labels.
 
 **Preprint**: arXiv link to be added upon upload  
 **Paper DOI**: to be added upon publication
@@ -27,8 +27,11 @@ We present a systematic geometric audit of cached AntigenLM embeddings for 111,7
 | TwoNN intrinsic dimension | 3.9-5.5 (trim-dependent) |
 | Median latent neighbor time difference (H1N1) | 2 months vs. 43 months (random) |
 | Median latent neighbor time difference (H3N2) | 2 months vs. 35 months (random) |
+| Clade precision@5 (H1N1) | 0.9149, 3.80x over subtype-matched random |
+| Clade precision@5 (H3N2) | 0.8609, 12.49x over subtype-matched random |
+| Time-stratified clade enrichment at +/-6 months | 1.55x H1N1, 3.18x H3N2 |
 
-The embedding cloud is molecularly organized, low-dimensional under the tested diagnostics, and locally temporally coherent. It does **not** establish antigenic similarity, phylogenetic validity, vaccine-strain relevance, sequence-generation reliability, or forecasting performance.
+The embedding cloud is molecularly organized, low-dimensional under the tested diagnostics, locally temporally coherent, and enriched for evolutionary-taxonomic clade labels. It does **not** establish antigenic similarity, quantitative phylogenetic preservation, vaccine-strain relevance, sequence-generation reliability, or forecasting performance.
 
 ## Repository Structure
 
@@ -42,13 +45,18 @@ latent_geometry/
 ├── paper_revision_outputs/
 │   ├── run_robustness_panel.py           # Deduplication and robustness correlations
 │   ├── run_random_embedding_baseline.py  # Random embedding negative control
+│   ├── run_clade_enrichment_analysis.py  # GISAID clade-label enrichment controls
 │   ├── robustness_panel_results.json
 │   ├── robustness_panel_summary.md
 │   ├── random_embedding_baseline_results.json
-│   └── random_embedding_baseline_summary.md
+│   ├── random_embedding_baseline_summary.md
+│   └── clade_enrichment_run.log
 ├── results/
 │   ├── latent_geometry_full_metrics.json # Primary analysis aggregate outputs
-│   └── latent_geometry_full_summary.md
+│   ├── latent_geometry_full_summary.md
+│   ├── gisaid_clade_enrichment_results.json
+│   ├── gisaid_clade_enrichment_summary.md
+│   └── gisaid_clade_enrichment_summary_es.md
 ├── figures/
 │   └── latent_geometry_full/             # Analysis figures in PDF/PNG format
 └── README.md
@@ -65,7 +73,7 @@ This repository provides:
 - aggregate results as JSON and Markdown summaries;
 - analysis code to reproduce the reported aggregate outputs from an authorized local cache;
 - manuscript figures and LaTeX source;
-- scripts for deduplication robustness checks and the random embedding negative control.
+- scripts for deduplication robustness checks, the random embedding negative control, and aggregate clade-label enrichment controls.
 
 The AntigenLM checkpoint used for embedding extraction is documented in the manuscript with SHA256:
 
@@ -85,6 +93,10 @@ authors. After download, verify that the local checkpoint matches the SHA256 doc
 A full GISAID acknowledgement table with accession identifiers, originating laboratories, and
 submitting laboratories should be included as Supplementary Table S1 in the journal submission
 package according to GISAID requirements.
+
+The clade-label enrichment analysis uses local GISAID EpiFlu metadata exports associated with
+`EPI_SET_260506bu`. This repository redistributes only aggregate clade-enrichment results; it
+does not redistribute the private metadata export or accession-level join table.
 
 ## Reproducing the Analysis
 
@@ -146,7 +158,24 @@ python paper_revision_outputs/run_random_embedding_baseline.py \
   --random-replicates 10
 ```
 
-### Step 5: Rebuild the manuscript package
+### Step 5: Run the GISAID clade-label enrichment analysis
+
+This step requires the private local GISAID metadata join table. It writes only aggregate outputs.
+
+```bash
+python paper_revision_outputs/run_clade_enrichment_analysis.py \
+  --cache-path results/embeddings_cache_full_all_available.pkl \
+  --metadata-join-path data/gisaid_metadata_private/gisaid_epiflu_isolates_2000_2022_epi_set_260506bu_joined_dedup_cache.csv
+```
+
+Primary outputs:
+
+- `results/gisaid_clade_enrichment_results.json`
+- `results/gisaid_clade_enrichment_summary.md`
+- `results/gisaid_clade_enrichment_summary_es.md`
+- `figures/latent_geometry_full/clade_precision_enrichment.pdf`
+
+### Step 6: Rebuild the manuscript package
 
 ```bash
 python make_paper_1_latent_geometry_full.py
@@ -166,6 +195,8 @@ Human-readable summaries are available in:
 - `results/latent_geometry_full_summary.md`
 - `paper_revision_outputs/robustness_panel_summary.md`
 - `paper_revision_outputs/random_embedding_baseline_summary.md`
+- `results/gisaid_clade_enrichment_summary.md`
+- `results/gisaid_clade_enrichment_summary_es.md`
 
 ## Citation
 
@@ -173,12 +204,13 @@ If you use this code or aggregate results, please cite:
 
 ```bibtex
 @article{orrego2026latent,
-  title   = {Auditing Molecular and Temporal Geometry in AntigenLM Latent Representations
+  title   = {Auditing Molecular, Temporal, and Evolutionary-Taxonomic Geometry
+             in AntigenLM Latent Representations
              of Influenza A HA/NA Sequences},
-  author  = {Orrego-Franco, Carlos Manuel and Riano-Rojas, Juan Carlos},
-  journal = {BMC Bioinformatics},
+  author  = {Orrego-Franco, Carlos Manuel and Ria{\~n}o-Rojas, Juan Carlos},
+  journal = {Scientific Reports},
   year    = {2026},
-  note    = {Submitted}
+  note    = {Prepared for submission}
 }
 ```
 
@@ -206,10 +238,9 @@ Aggregate result files (JSON and Markdown summaries) may be reused with attribut
 ## Contact
 
 Carlos Manuel Orrego-Franco  
-Universidad Nacional de Colombia
-corregof@unal.edu.co
+Universidad Nacional de Colombia  
+ORCID: https://orcid.org/0009-0001-9163-5137  
 [GitHub: @cmorregof](https://github.com/cmorregof)
 
 Juan Carlos Riaño-Rojas  
 Universidad Nacional de Colombia
-jcrianoro@unal.edu.co
