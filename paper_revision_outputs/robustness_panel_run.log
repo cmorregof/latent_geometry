@@ -1,0 +1,47 @@
+[robustness] Deduplicated Spearman panel
+  seed=42 H1N1 nt_hamming_ha: rho=0.8069 valid=199,870 omitted=130
+  seed=42 H1N1 nt_hamming_na: rho=0.7665 valid=199,986 omitted=14
+  seed=42 H1N1 nt_hamming_ha_na: rho=0.8344 valid=199,856 omitted=144
+  seed=42 H1N1 aa_hamming_ha: rho=0.7202 valid=199,870 omitted=130
+  seed=42 H1N1 aa_hamming_na: rho=0.6829 valid=199,986 omitted=14
+  seed=42 H1N1 aa_hamming_ha_na: rho=0.7544 valid=199,856 omitted=144
+  seed=42 H3N2 nt_hamming_ha: rho=0.5878 valid=199,982 omitted=18
+  seed=42 H3N2 nt_hamming_na: rho=0.5282 valid=199,345 omitted=655
+  seed=42 H3N2 nt_hamming_ha_na: rho=0.6302 valid=199,338 omitted=662
+  seed=42 H3N2 aa_hamming_ha: rho=0.6346 valid=199,982 omitted=18
+  seed=42 H3N2 aa_hamming_na: rho=0.4497 valid=199,346 omitted=654
+  seed=42 H3N2 aa_hamming_ha_na: rho=0.6130 valid=199,339 omitted=661
+  seed=7 H1N1 nt_hamming_ha: rho=0.8089 valid=199,897 omitted=103
+  seed=7 H1N1 nt_hamming_na: rho=0.7689 valid=199,985 omitted=15
+  seed=7 H1N1 nt_hamming_ha_na: rho=0.8366 valid=199,882 omitted=118
+  seed=7 H1N1 aa_hamming_ha: rho=0.7240 valid=199,897 omitted=103
+  seed=7 H1N1 aa_hamming_na: rho=0.6846 valid=199,985 omitted=15
+  seed=7 H1N1 aa_hamming_ha_na: rho=0.7573 valid=199,882 omitted=118
+  seed=7 H3N2 nt_hamming_ha: rho=0.5879 valid=199,980 omitted=20
+  seed=7 H3N2 nt_hamming_na: rho=0.5260 valid=199,347 omitted=653
+  seed=7 H3N2 nt_hamming_ha_na: rho=0.6306 valid=199,340 omitted=660
+  seed=7 H3N2 aa_hamming_ha: rho=0.6348 valid=199,980 omitted=20
+  seed=7 H3N2 aa_hamming_na: rho=0.4468 valid=199,352 omitted=648
+  seed=7 H3N2 aa_hamming_ha_na: rho=0.6121 valid=199,345 omitted=655
+  seed=123 H1N1 nt_hamming_ha: rho=0.8099 valid=199,909 omitted=91
+  seed=123 H1N1 nt_hamming_na: rho=0.7676 valid=199,984 omitted=16
+  seed=123 H1N1 nt_hamming_ha_na: rho=0.8364 valid=199,893 omitted=107
+  seed=123 H1N1 aa_hamming_ha: rho=0.7242 valid=199,908 omitted=92
+  seed=123 H1N1 aa_hamming_na: rho=0.6821 valid=199,983 omitted=17
+  seed=123 H1N1 aa_hamming_ha_na: rho=0.7571 valid=199,891 omitted=109
+  seed=123 H3N2 nt_hamming_ha: rho=0.5892 valid=199,981 omitted=19
+  seed=123 H3N2 nt_hamming_na: rho=0.5319 valid=199,373 omitted=627
+  seed=123 H3N2 nt_hamming_ha_na: rho=0.6336 valid=199,366 omitted=634
+  seed=123 H3N2 aa_hamming_ha: rho=0.6362 valid=199,981 omitted=19
+  seed=123 H3N2 aa_hamming_na: rho=0.4502 valid=199,380 omitted=620
+  seed=123 H3N2 aa_hamming_ha_na: rho=0.6141 valid=199,373 omitted=627
+[robustness] Temporal label-permutation control
+  H1N1 k=5: true median=2.00; permuted medians=[42.0, 43.0, 42.0]
+  H1N1 k=10: true median=2.00; permuted medians=[42.0, 43.0, 43.0]
+  H1N1 k=20: true median=2.00; permuted medians=[42.0, 43.0, 43.0]
+  H3N2 k=5: true median=2.00; permuted medians=[35.0, 35.0, 35.0]
+  H3N2 k=10: true median=2.00; permuted medians=[35.0, 35.0, 35.0]
+  H3N2 k=20: true median=2.00; permuted medians=[35.0, 35.0, 35.0]
+JSON: paper_revision_outputs/robustness_panel_results.json
+Summary: paper_revision_outputs/robustness_panel_summary.md
+Runtime seconds: 25.4
